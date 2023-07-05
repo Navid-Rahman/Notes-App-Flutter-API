@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app_flutter_api/screens/notes_delete.dart';
 import 'package:notes_app_flutter_api/screens/notes_modify.dart';
 import 'package:notes_app_flutter_api/utils/constants.dart';
 import 'package:notes_app_flutter_api/models/notes_for_listing.dart';
@@ -57,24 +58,35 @@ class NoteList extends StatelessWidget {
         ),
         itemCount: notes.length,
         itemBuilder: (_, index) {
-          return ListTile(
-            title: Text(
-              notes[index].noteTitle,
-              style: kNotesTitleStyle,
-            ),
-            subtitle: Text(
-              'Last edited on ${formatDateTime(notes[index].lastEditDateTime)}',
-              style: kNotesSubtitleStyle,
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      NotesModify(noteID: notes[index].noteID),
-                ),
+          return Dismissible(
+            key: ValueKey(notes[index].noteID),
+            direction: DismissDirection.endToStart,
+            onDismissed: (direction) {},
+            confirmDismiss: (direction) {
+              return showDialog(
+                context: context,
+                builder: (_) => const NoteDelete(),
               );
             },
+            child: ListTile(
+              title: Text(
+                notes[index].noteTitle,
+                style: kNotesTitleStyle,
+              ),
+              subtitle: Text(
+                'Last edited on ${formatDateTime(notes[index].lastEditDateTime)}',
+                style: kNotesSubtitleStyle,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        NotesModify(noteID: notes[index].noteID),
+                  ),
+                );
+              },
+            ),
           );
         },
       ),
