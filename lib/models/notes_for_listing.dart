@@ -2,7 +2,7 @@
 class NotesForListing {
   DateTime createDateTime;
   DateTime lastEditDateTime;
-  String noteID;
+  int noteID;
   String noteTitle;
 
   NotesForListing({

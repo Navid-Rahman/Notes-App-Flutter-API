@@ -8,19 +8,19 @@ class NoteList extends StatelessWidget {
 
   final notes = [
     NotesForListing(
-      noteID: '1',
+      noteID: 1,
       noteTitle: 'Note 1',
       createDateTime: DateTime.now(),
       lastEditDateTime: DateTime.now(),
     ),
     NotesForListing(
-      noteID: '2',
+      noteID: 2,
       noteTitle: 'Note 2',
       createDateTime: DateTime.now(),
       lastEditDateTime: DateTime.now(),
     ),
     NotesForListing(
-      noteID: '3',
+      noteID: 3,
       noteTitle: 'Note 3',
       createDateTime: DateTime.now(),
       lastEditDateTime: DateTime.now(),
@@ -66,6 +66,15 @@ class NoteList extends StatelessWidget {
               'Last edited on ${formatDateTime(notes[index].lastEditDateTime)}',
               style: kNotesSubtitleStyle,
             ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      NotesModify(noteID: notes[index].noteID),
+                ),
+              );
+            },
           );
         },
       ),
