@@ -62,12 +62,30 @@ class NoteList extends StatelessWidget {
             key: ValueKey(notes[index].noteID),
             direction: DismissDirection.endToStart,
             onDismissed: (direction) {},
-            confirmDismiss: (direction) {
-              return showDialog(
+            confirmDismiss: (direction) async {
+              final result = await showDialog(
                 context: context,
                 builder: (_) => const NoteDelete(),
               );
+              // print(result);
+              return result;
             },
+            background: Container(
+              color: Colors.red,
+              padding: const EdgeInsets.only(left: 16),
+              child: const Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    right: 12,
+                  ),
+                  child: Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
             child: ListTile(
               title: Text(
                 notes[index].noteTitle,

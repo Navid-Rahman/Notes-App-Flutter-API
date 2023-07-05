@@ -11,7 +11,7 @@ class NoteDelete extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pop(true);
           },
           child: const Text('Yes'),
         ),
